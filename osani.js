@@ -52,7 +52,7 @@
         }
         if(inArray(["width","height","left","top","right","bottom","fontSize","marginLeft","marginTop","marginRight","marginBottom",
                 "paddingLeft","paddingTop","paddingRight","paddingBottom"])){
-            v.style[p] = current + "px";
+            v.style[p] = current + "rem";
         }
         else if(inArray(["opacity"])){
             v.style[p] = current;
@@ -63,7 +63,7 @@
                 tmp = p+"("+ current + ")";
             }
             else if(inArray(["translateX","translateY"])){
-                tmp = p+"("+ current + "px)";
+                tmp = p+"("+ current + "rem)";
             }
             else if(inArray(["rotate","skewX","skewY"])){
                 tmp = p+"("+ current + "deg)";

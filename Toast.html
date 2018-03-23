@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1080,user-scalable=0"/>
+    <title>rem</title>
+    <style>
+        html{
+            font-size: 43px;
+        }
+        body{
+            font-family: Arial;
+        }
+        #show{
+            font-size: 1rem;
+        }
+
+    </style>
+    <script src="osani.js"></script>
+</head>
+<body>
+<input type="button" value="show" id="show">
+<p>Hello World!  show</p>
+<script>
+    (function () {
+        var div = null
+        var ani = null
+        var ani2 = null
+        function css(o) {
+            for(var k in o)
+                div.style[k] = o[k]
+        }
+        window.Toast = {
+            show:function (text,time) {
+                if(!div){
+                    div = document.createElement('div')
+                    document.body.appendChild(div)
+                    css({
+                        'backgroundColor':'rgba(0,0,0,.6)',
+                        'padding':'.5rem 2.5rem',
+                        'color':'white',
+                        'borderRadius':'.4rem',
+                        'position':'fixed',
+                        'left':'50%',
+                        'top':'50%'
+                    })
+                    ani = new osani({
+                        el:div,
+                        type:'opacity',
+                        begin:0,
+                        end:1,
+                        time:300,
+                    })
+                    ani2 = new osani({
+                        el:div,
+                        type:'translateY',
+                        begin:10,
+                        end:0,
+                        time:150,
+                    })
+                }
+                div.innerHTML = text
+                div.style.display = 'block'
+                var rect = div.getBoundingClientRect()
+                var w = rect.width
+                var h = rect.height
+                css({
+                    'marginLeft':-w/2 + 'px',
+                    'marginTop':-h/2 + 'px'
+                })
+                ani.reset()
+                ani.run()
+                ani2.reset()
+                ani2.run()
+                setTimeout(function () {
+                    div.style.display = 'none'
+                },time?time:2000)
+            }
+        }
+    }())
+
+    document.querySelector('#show').onclick = function () {
+        Toast.show('save successfully!')
+    }
+</script>
+</body>
+</html>
